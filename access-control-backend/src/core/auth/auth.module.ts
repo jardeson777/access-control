@@ -8,6 +8,8 @@ import { UsersService } from '../users/users.service';
 import { PassportModule } from '@nestjs/passport';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../../shared/database/prisma.service';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from '../../shared/guard/auth.guard';
 
 @Module({
   imports: [PassportModule.register({ defaultStrategy: 'jwt' })],
@@ -20,6 +22,10 @@ import { PrismaService } from '../../shared/database/prisma.service';
     UsersService,
     JwtService,
     PrismaService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
   ],
 })
 export class AuthModule {

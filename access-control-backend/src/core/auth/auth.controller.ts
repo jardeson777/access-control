@@ -1,6 +1,7 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthenticateInput } from './dtos/authenticate-input.dto';
+import { Public } from '../../shared/decorators/public.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -8,6 +9,7 @@ export class AuthController {
     //
   }
 
+  @Public()
   @Post('login')
   @HttpCode(200)
   async login(@Body() authenticateInput: AuthenticateInput) {

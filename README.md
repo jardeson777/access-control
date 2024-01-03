@@ -3,7 +3,7 @@
 // ✅ criar usuário
 // ✅ fazer login
 // ✅ criar, listar e remover produto
-// ❌ criar produto somente usuário logado
+// ✅ criar, listar e remover produto somente usuário logado
 // ❌ integrar permision.io
 // ❌ criar seed para usuário adm
 // ❌ adm cria funções e permissões
