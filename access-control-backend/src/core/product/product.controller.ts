@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
+import { Permition } from '../../shared/decorators/permition.decorator';
 
 @Controller('product')
 export class ProductController {
@@ -18,6 +19,7 @@ export class ProductController {
   }
 
   @Post()
+  @Permition({ resources: 'product', action: 'create' })
   async create(@Body() createProductDto: CreateProductDto) {
     const productExists = await this.productService.findByName(
       createProductDto.name,
@@ -36,11 +38,13 @@ export class ProductController {
   }
 
   @Get()
+  @Permition({ resources: 'product', action: 'read' })
   async findAll() {
     return this.productService.findAll();
   }
 
   @Delete(':id')
+  @Permition({ resources: 'product', action: 'delete' })
   async remove(@Param('id') id: string) {
     const productExists = await this.productService.findById(Number(id));
 
