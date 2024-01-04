@@ -53,6 +53,14 @@ export class AuthorizationService {
     return await this.permit.api.roles.list();
   }
 
+  async getByKey(roleKey: string) {
+    try {
+      return await this.permit.api.roles.getByKey(roleKey);
+    } catch (error) {
+      return null;
+    }
+  }
+
   async createUser(userInput: UserInput) {
     return await this.permit.api.users.create({
       key: userInput.key,

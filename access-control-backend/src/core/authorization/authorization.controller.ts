@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AuthorizationService } from './authorization.service';
 import { Permition } from '../../shared/decorators/permition.decorator';
 import { UserInput } from './dtos/user.dto';
@@ -34,6 +34,12 @@ export class AuthorizationController {
   @Permition({ resources: 'all', action: 'all' })
   async listRoles() {
     return await this.authorizationService.listRoles();
+  }
+
+  @Get('roles/:key')
+  @Permition({ resources: 'all', action: 'all' })
+  async getByKey(@Param() key: string) {
+    return await this.authorizationService.getByKey(key);
   }
 
   @Post('users')
