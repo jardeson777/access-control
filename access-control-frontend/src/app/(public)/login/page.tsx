@@ -10,6 +10,7 @@ import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthenticationService } from "../../../services/authentication.service";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email("Email inválido"),
@@ -20,6 +21,7 @@ type FormSchema = z.infer<typeof formSchema>;
 
 const LoginPage = () => {
   const { login } = AuthenticationService();
+  const { replace } = useRouter();
   const form = useForm<FormSchema>({
     defaultValues: {
       email: '',
@@ -29,7 +31,11 @@ const LoginPage = () => {
   });
 
   const onSubmit = async (data: FormSchema) => {
-    await login(data);
+    const output = await login(data);
+
+    if (output.success) {
+      replace("/produtos");
+    }
   };
 
   return (
