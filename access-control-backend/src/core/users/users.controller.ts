@@ -16,15 +16,17 @@ export class UsersController {
   @Post()
   @Permition({ resources: 'user', action: 'create' })
   async create(@Body() createUserDto: CreateUserDto) {
-    try {
-      const userCreated = await this.usersService.create(createUserDto);
+    const userWasCreated = await this.usersService.findByEmail(
+      createUserDto.email,
+    );
 
-      return {
-        message: 'User created',
-        id: userCreated.id,
-      };
-    } catch (error) {
-      throw new ConflictException('User already exists');
-    }
+    if (userWasCreated) throw new ConflictException('User already exists');
+
+    const userCreated = await this.usersService.create(createUserDto);
+
+    return {
+      message: 'User created',
+      id: userCreated.id,
+    };
   }
 }

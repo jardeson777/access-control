@@ -5,15 +5,15 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { TokenService } from '../../core/auth/token.service';
+import { TokenService } from '../../core/authentication/token.service';
 import { Reflector } from '@nestjs/core';
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
 import { ConfigService } from '@nestjs/config';
-import { PermitIo } from '../permission/permit-io';
 import {
   HAVE_PERMITION_KEY,
   PermitionType,
 } from '../decorators/permition.decorator';
+import { PermitIo } from '../../core/authorization/permit-io';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

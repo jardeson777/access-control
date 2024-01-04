@@ -3,8 +3,9 @@ import { config } from './shared/config/config';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './core/users/users.module';
 import { PrismaService } from './shared/database/prisma.service';
-import { AuthModule } from './core/auth/auth.module';
+import { AuthModule } from './core/authentication/auth.module';
 import { ProductModule } from './core/product/product.module';
+import { AuthorizationModule } from './core/authorization/authorization.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ProductModule } from './core/product/product.module';
     UsersModule,
     AuthModule,
     ProductModule,
+    AuthorizationModule,
   ],
   controllers: [],
   providers: [PrismaService],

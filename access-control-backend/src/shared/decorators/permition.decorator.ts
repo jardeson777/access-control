@@ -1,8 +1,9 @@
 import { SetMetadata } from '@nestjs/common';
+import { Action } from '../../core/authorization/action.enum';
 
 export type PermitionType = {
-  resources: 'product' | 'user';
-  action: 'create' | 'read' | 'delete';
+  resources: string;
+  action: keyof typeof Action;
 };
 
 export const HAVE_PERMITION_KEY = 'havePermition';
